@@ -1,0 +1,9 @@
+.ChatRootLayout{
+  width: 100vw;
+  height: 100vh;
+  background-color: #E3F2FD;
+  & > .chatbox{
+    height: 100%;
+    overflow-y: auto;
+  }
+}

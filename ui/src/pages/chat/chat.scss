@@ -1,0 +1,19 @@
+.chat-page{
+  display: flex;
+  height: 95%;
+  margin-top: 2%;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid rgb(232, 232, 232);
+  overflow: hidden;
+  & > .aside-sidebar {
+    flex: 0 0 60px;
+  }
+  & > .nav-contact {
+    width: 260px;
+    min-width: 240px;
+  }
+  & > .article-chatbox {
+    flex: 1 0 0;
+  }
+}

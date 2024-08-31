@@ -1,0 +1,18 @@
+@import "@/assets/scss/mixins";
+.login-container {
+  max-width: 450px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  .login-card {
+    background-color: #fff;
+  }
+  .trigger-form {
+    @include flex-ui(row, center, center);
+  }
+  .verfyCode {
+    width: 180px;
+  }
+}
+

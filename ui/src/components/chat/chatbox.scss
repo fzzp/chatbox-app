@@ -1,0 +1,82 @@
+.com-chatbox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgb(242, 242, 242);
+
+  .message-header {
+    flex: 0 0 60px;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    color: #0c0c0c;
+    background: inherit;
+  }
+
+  .message-input {
+    flex: 0 0 150px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #e8e8e8;
+
+    .toolbar {
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 40px;
+      font-size: 22px;
+
+      .photo-icon {
+        transform: scale(1.09);
+      }
+    }
+
+    .message-textarea {
+      flex: 1;
+      background: inherit;
+
+      textarea {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        font-size: 14px;
+        padding: 0 16px;
+        background: inherit;
+      }
+    }
+  }
+
+  .message-box {
+    flex: 1;
+    overflow-y: auto;
+    background: inherit;
+
+    .contact-item {
+      .text {
+        flex: 1;
+        width: calc(100% - 80px);
+        overflow: hidden;
+      }
+
+      .last-message {
+        display: block;
+        width: 100%;
+        text-wrap: wrap;
+      }
+    }
+    .keep-right {
+      flex-flow: row-reverse;
+      .username{
+        text-align: right;
+      }
+      .text {
+        text-align: right;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@import "./mixins";
+@import "./utils";
+
+*,
+*::before,
+*::after {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+ul,li {
+   list-style: none;
+
+}
+ul {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+
+::-webkit-scrollbar {
+   width: 5px;
+ }
+ 
+ ::-webkit-scrollbar-thumb {
+   background: #ccc; // 滑块颜色
+   border-radius: 5px; // 滑块圆角
+ }
+
+// NOTE: 配置自己风格 bootstrap 样式
+
+// Colors
+$primary: #219cff; // #066fd1;
+
+@import 'bootstrap/scss/bootstrap';

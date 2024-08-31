@@ -1,0 +1,7 @@
+@import "@/assets/scss/mixins";
+
+.ul-list{
+  list-style: none;
+  @include flex-ui(row, flex-start, center);
+  gap: 1rem;
+}

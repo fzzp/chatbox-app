@@ -1,0 +1,8 @@
+API_ENV: development # development(开发) production(生产)
+
+JWTSecretKey: 1234567890qwertyuiopasdfghjklzxcvbnm
+AccessTokenDur: 15m # 15分钟
+RefreshTokenDur: 360h # 15天
+
+LogLevel: INFO # DEBUG,INFO,WARN,ERROR
+LogOutput: logs/access.log
