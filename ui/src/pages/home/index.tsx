@@ -22,7 +22,7 @@ const Home = () => {
   }
 
   function handleSend () {
-    socket.send(JSON.stringify({action: 0, data: "你好 Hello"}))
+    socket.send(JSON.stringify({type: "send_message", payload: "你好 Hello"}))
   }
 
   return (

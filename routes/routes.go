@@ -13,7 +13,7 @@ import (
 
 var (
 	authApi v1.AuthApi
-	ss      socket.SocketServer
+	ss      = socket.NewSocketServer()
 )
 
 func NewApiRoutes() http.Handler {

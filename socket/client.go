@@ -1,24 +1,22 @@
 package socket
 
 import (
-	"chatbox-app/utils"
-	"fmt"
 	"log"
 
 	"github.com/gorilla/websocket"
 )
 
 type Client struct {
-	conn        *websocket.Conn
-	payloadChan chan WsPayload
-	ss          *SocketServer
+	ss      *SocketServer
+	conn    *websocket.Conn
+	msgChan chan Event
 }
 
 func NewClient(conn *websocket.Conn, ss *SocketServer) *Client {
 	return &Client{
-		conn:        conn,
-		payloadChan: make(chan WsPayload),
-		ss:          ss,
+		conn:    conn,
+		msgChan: make(chan Event),
+		ss:      ss,
 	}
 }
 
@@ -29,15 +27,24 @@ func (c *Client) readJson() {
 		}
 	}()
 
-	var payload WsPayload
+	var event Event
 	for {
-		if err := c.conn.ReadJSON(&payload); err != nil {
+		if err := c.conn.ReadJSON(&event); err != nil {
 			log.Printf("%s c.conn.ReadJSON error: %v\n", c.conn.RemoteAddr(), err)
 			break
 		}
-		log.Println("接受到消息：", payload.Data)
-		// TODO: 抽取封装，处理事件
-		c.payloadChan <- payload
+		log.Println("接受到消息：", event.Payload)
+		if err := c.ss.dispatchEvent(event, c); err != nil {
+			log.Println("dispatchEvent error: ", err)
+		}
+		// handle, ok := c.ss.handlers[event.Type]
+		// if ok {
+		// 	if err := handle(event, c); err != nil {
+		// 		c.msgChan <- event
+		// 	}
+		// } else {
+
+		// }
 	}
 }
 
@@ -50,15 +57,15 @@ func (c *Client) writeJson() {
 
 	for {
 		select {
-		case payload, ok := <-c.payloadChan:
+		case event, ok := <-c.msgChan:
 			if !ok {
 				// TODO: 做点什么
 				return
 			}
 
-			echo := WsPayload{
-				Action: payload.Action,
-				Data:   fmt.Sprintf("%v ->>> %d", payload.Data, utils.RandomInt(1, 1000)),
+			echo := Event{
+				Type:    ET_SendMessage,
+				Payload: event.Payload,
 			}
 			if err := c.conn.WriteJSON(&echo); err != nil {
 				log.Printf("c.conn.WriteJSON error: %v, payload: %v", err, echo)
